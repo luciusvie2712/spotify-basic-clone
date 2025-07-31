@@ -1,9 +1,5 @@
-const cloudinary = require('cloudinary').v2
 const albumModel = require('../models/album.model')
-
-const uploadFile = (file, type) => {
-    return cloudinary.uploader.upload(file.path, {resource_type: type})
-}
+const { uploadFile } = require('../util/uploadFile.util')
 
 const handleAddAlbum = async (name ,description, bgColor, imageFile) => {
     try {
@@ -23,7 +19,7 @@ const handleAddAlbum = async (name ,description, bgColor, imageFile) => {
         
         return newAlbum
     } catch (error) {
-        console.log(">> Error: ", error)
+        console.error(">> Error when adding album: ", error.message)
         return null
     }
 }

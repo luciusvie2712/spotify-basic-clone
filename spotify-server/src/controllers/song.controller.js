@@ -1,5 +1,3 @@
-// const cloudinary = require('cloudinary').v2
-// const songModel = require('../models/song.model')
 const { handleAddSong, handleGetListSong, handleDeleteSong } = require('../services/song.service')
 
 const addSong = async (req, res) => {
@@ -14,19 +12,19 @@ const addSong = async (req, res) => {
             imageFile: image[0],
             audioFile: audio[0], 
         })
-        return res.json({success: true, message: "Song Added", data: songData})
+        return res.status(201).json({success: true, message: "Song Added", data: songData})
     } catch (error) {
-        return res.json({success: false, message: error})
+        return res.status(500).json({success: false, message: error})
     }
 }
 
 const getListSong = async (req, res) => {
     try {
         const dataListSong = await handleGetListSong({})
-        return {
+        return res.status(200).json({
             Ec: 1,
             Em: "Get list song is success!"
-        }
+        })
     } catch (error) {
         return res.status(500).json({ message: "Failed to get songs"})
     }
@@ -36,10 +34,10 @@ const deleteSong = async (req, res) => {
     try {
         const id = req.params
         await handleDeleteSong(id)
-        return {
+        return res.status(200).json({
             Ec: 1,
             Em: "Song removed"
-        }
+        })
     } catch (error) {
         return res.status(500).json({message: "Failed to remove song"})
     }

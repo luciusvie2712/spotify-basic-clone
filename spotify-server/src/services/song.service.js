@@ -1,10 +1,5 @@
-const {addSong, getListSong} = require('../controllers/song.controller')
 const Song = require('../models/song.model')
-const cloudinary = require('cloudinary').v2
-
-const uploadFile = (file, type) => {
-    return cloudinary.uploader.upload(file.path, {resource_type: type})
-}
+const { uploadFile } = require('../util/uploadFile.util')
 
 const getFormattedDuration = (duration) => {
     const minutes = Math.floor(duration / 60).toString().padStart(2, '0')
@@ -35,7 +30,7 @@ const handleAddSong = async ({name, description, album, audioFile, imageFile}) =
 
         return newSong
     } catch (error) {
-        console.log(">> Error: ", error)
+        console.error(">> Error when adding song: ", error.message)
         return null
     }
 }

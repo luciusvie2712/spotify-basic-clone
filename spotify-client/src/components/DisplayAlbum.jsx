@@ -2,12 +2,14 @@ import NavBar from "./NavBar"
 import { useParams } from "react-router-dom"
 import { albumsData, songsData } from "../assets/assets"
 import logoSpotify from "../assets/data/spotify_logo.png"
+import { useContext } from "react"
+import { PlayerContext } from "../context/PlayerContext"
 
 const DisplayAlbum =  () => {
-const {id} = useParams()
-const data = albumsData[id]
-console.log(data)
-
+    const {id} = useParams()
+    const data = albumsData[id]
+    console.log(data)
+    const { playWithId } = useContext(PlayerContext)
 
     return (
         <>
@@ -33,7 +35,7 @@ console.log(data)
             <hr />
             <div>
                 {songsData.map((item, index) => (
-                    <div className="grid grid-cols-3 sm:grid-cols-4 gap-2 p-2 items-center cursor-pointer hover:bg-[#5c555561] text-[#ccc]">
+                    <div onClick={() => playWithId(item.id)} className="grid grid-cols-3 sm:grid-cols-4 gap-2 p-2 items-center cursor-pointer hover:bg-[#5c555561] text-[#ccc]">
                         <p className="text-white">
                             <b className="mr-4 text-[#a7a7a7]">{index+1}</b>
                             <img src={item.image} className="inline w-10 mr-5"/>

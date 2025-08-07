@@ -31,18 +31,18 @@ root/
 
 ### Songs
 
-- Add song (`POST /songs`)  
+- Add song (`POST /add-song`)  
   Upload mp3 file to Cloudinary and store metadata + file URL in MongoDB.
-- Get all songs (`GET /songs`)
-- Delete song (`DELETE /songs/:id`)  
+- Get all songs (`GET /list-song`)
+- Delete song (`DELETE /delete-song/:id`)  
   Delete file from Cloudinary and remove record from MongoDB.
 
 ### Albums
 
-- Add album (`POST /albums`)  
+- Add album (`POST /add-album`)  
   Upload cover image to Cloudinary and store album metadata + image URL in MongoDB.
-- Get all albums (`GET /albums`)
-- Delete album (`DELETE /albums/:id`)  
+- Get all albums (`GET /list-album`)
+- Delete album (`DELETE /delete-album/:id`)  
   Delete image from Cloudinary and remove record from MongoDB.
 
 > Note: API routes may vary depending on your backend implementation.

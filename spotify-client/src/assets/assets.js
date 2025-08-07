@@ -14,9 +14,13 @@ import img13 from './data/img13.jpg'
 import img14 from './data/img14.jpg'
 import img15 from './data/img15.jpg'
 import img16 from './data/img16.jpg'
+import img17 from './data/img17.jpg'
 import song1 from  './data/song1.mp3'
 import song2 from  './data/song2.mp3'
 import song3 from  './data/song3.mp3'
+import song4 from  './data/song4.mp3'
+import song5 from  './data/song5.mp3'
+import song6 from  './data/song6.mp3'
 
 export const albumsData = [
     {   
@@ -90,42 +94,26 @@ export const songsData = [
     },
     {
         id:3,
-        name: "Song Four",
+        name: "KHÔNG BẰNG×HEY HEY",
         image: img4,
-        file:song1,
-        desc:"Put a smile on your face with these happy tunes",
+        file:song5,
+        desc:"Nam  Milo Remix",
         duration:"2:50"
     },
     {
         id:4,
-        name: "Song Five",
+        name: "Nhu Mot Nguoi Dung",
         image: img5,
-        file:song2,
-        desc:"Put a smile on your face with these happy tunes",
-        duration:"3:10"
+        file:song6,
+        desc:"Dao Quynh Nhu",
+        duration:"1:25"
     },
     {
         id:5,
-        name: "Song Six",
-        image: img14    ,
-        file:song3,
-        desc:"Put a smile on your face with these happy tunes",
-        duration:"2:45"
+        name: "Em Chang Sao Ma",
+        image: img17,
+        file:song4,
+        desc:"Nam Milo",
+        duration:"6:24"
     },
-    {
-        id:6,
-        name: "Song Seven",
-        image: img7,
-        file:song1,
-        desc:"Put a smile on your face with these happy tunes",
-        duration:"2:18"
-    },
-    {
-        id:7,
-        name: "Song Eight",
-        image: img12,
-        file:song2,
-        desc:"Put a smile on your face with these happy tunes",
-        duration:"2:35"
-    }
 ]

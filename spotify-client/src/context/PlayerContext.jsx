@@ -61,6 +61,10 @@ const PlayerContextProvider = (props) => {
         setTimeout(() => {
             audioRef.current.ontimeupdate = () => {
                 seekBar.current.style.width = (Math.floor(audioRef.current.currentTime/audioRef.current.duration*100))+"%"
+                if (seekBar.current.style.width === "100%") {
+                    setPlayStatus(false)
+                    return seekBar.current.style.width = "0%"
+                }
                 setTime({
                     currentTime: {
                         second: Math.floor(audioRef.current.currentTime%60),

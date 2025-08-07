@@ -1,7 +1,9 @@
+import { useNavigate } from "react-router-dom"
 
 const AlbumCard = ({image, name, desc, id}) => {
+    const navigate = useNavigate()
     return (
-        <div className="min-w-[180px] p-2 px-3 rounded cursor-pointer hover:bg-[#2b2b2b] ">
+        <div onClick={() => navigate(`/album/${id}`)} className="min-w-[180px] p-2 px-3 rounded cursor-pointer hover:bg-[#2b2b2b] ">
             <img src={image} className="rounded" />
             <p className="font-bold mt-2 mb-1">{name}</p>
             <p className="font-slate-200 text-sm">{desc}</p>

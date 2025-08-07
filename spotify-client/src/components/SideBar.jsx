@@ -1,12 +1,14 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const SideBar = () => {
+    const navigate = useNavigate()
     return (
         <div className="w-[25%] h-full flex-col gap-2 text-white lg:flex p-2 hidden">
             <div className="bg-[#121212] h-[15%] justify-around flex flex-col rounded ">
                 <div className="flex items-center gap-3 pl-8 cursor-pointer">
                     <i className="fa-regular fa-house text-[18px]"></i>
-                    <p className="font-bold">Home</p>
+                    <p onClick={() => navigate('/')} className="font-bold">Home</p>
                 </div>
                 <div className="flex items-center gap-3 pl-8 cursor-pointer">
                     <i class="fa-solid fa-magnifying-glass text-[18px]"></i>

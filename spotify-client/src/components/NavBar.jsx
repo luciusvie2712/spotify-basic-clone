@@ -1,12 +1,13 @@
-
+import { useNavigate } from "react-router-dom"
 
 const NavBar = () => {
+    const navigate = useNavigate()
     return (
         <>
             <div className="w-full flex justify-between items-center ">
                 <div className="flex item-center gap-4">
-                    <i className="fa-solid fa-angle-left bg-black p-3 rounded-full px-4  pr-6 cursor-pointer"></i>
-                    <i className="fa-solid fa-angle-right bg-black p-3 rounded-full px-4  pr-6 cursor-pointer"></i>
+                    <i onClick={() => navigate(-1)} className="fa-solid fa-angle-left bg-black p-3 rounded-full px-4  pr-6 cursor-pointer"></i>
+                    <i onClick={() => navigate(1)} className="fa-solid fa-angle-right bg-black p-3 rounded-full px-4  pr-6 cursor-pointer"></i>
                 </div>
                 <div className="flex gap-5 items-center">
                     <p className="bg-white text-black font-semibold p-2 rounded-3xl px-5 cursor-pointer hover:bg-[#eee9e9]">Explore Primeum</p>

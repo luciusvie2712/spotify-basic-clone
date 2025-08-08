@@ -147,10 +147,3 @@ Recommended future improvements:
  
 
 ```
-
----
-
-**Xong. Chuẩn Markdown, không emoji, dễ đọc, dễ maintain.**  
-Nếu mày muốn tao xuất thành file `README.md` luôn thì rep:  
-**"Xuất file README.md luôn đi mày."**
-```

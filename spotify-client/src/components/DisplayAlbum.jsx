@@ -36,10 +36,10 @@ const DisplayAlbum =  () => {
             <div>
                 {songsData.map((item, index) => (
                     <div onClick={() => playWithId(item.id)} className="grid grid-cols-3 sm:grid-cols-4 gap-2 p-2 items-center cursor-pointer hover:bg-[#5c555561] text-[#ccc]">
-                        <p className="text-white">
+                        <p className="text-white flex items-center relative overflow-hidden">
                             <b className="mr-4 text-[#a7a7a7]">{index+1}</b>
                             <img src={item.image} className="inline w-10 mr-5"/>
-                            {item.name}
+                            <p className="whitespace-nowrap animate-marquee">{item.name}</p>
                         </p>
                         <p className="text-[15px]">{data.name}</p>
                         <p className="text-[15px] hidden sm:block">5 days ago</p>
@@ -47,7 +47,9 @@ const DisplayAlbum =  () => {
                     </div>
                 ))}
             </div>
+           
         </>
+        
     )
 }
 

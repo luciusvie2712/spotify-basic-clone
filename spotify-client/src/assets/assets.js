@@ -116,4 +116,12 @@ export const songsData = [
         desc:"Nam Milo",
         duration:"6:24"
     },
+    {
+        id:6,
+        name: "Em Chang Sao Ma",
+        image: img17,
+        file:song4,
+        desc:"Nam Milo",
+        duration:"6:24"
+    },
 ]

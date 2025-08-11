@@ -5,7 +5,7 @@ const addSong = async (req, res) => {
         const {name, description, album} = req.body
         const {audio, image} = req.files
    
-        const songData = handleAddSong({
+        const songData = await handleAddSong({
             name, 
             description,
             album,
@@ -14,7 +14,7 @@ const addSong = async (req, res) => {
         })
         return res.status(201).json({success: true, message: "Song Added", data: songData})
     } catch (error) {
-        return res.status(500).json({success: false, message: error})
+        return res.status(500).json({success: false, message: error.message })
     }
 }
 
@@ -22,8 +22,9 @@ const getListSong = async (req, res) => {
     try {
         const dataListSong = await handleGetListSong({})
         return res.status(200).json({
-            Ec: 1,
-            Em: "Get list song is success!"
+            success: 1,
+            message: "Get list song is success!",
+            data: dataListSong
         })
     } catch (error) {
         return res.status(500).json({ message: "Failed to get songs"})
@@ -32,11 +33,11 @@ const getListSong = async (req, res) => {
 
 const deleteSong = async (req, res) => {
     try {
-        const id = req.params
+        const { id } = req.params
         await handleDeleteSong(id)
         return res.status(200).json({
-            Ec: 1,
-            Em: "Song removed"
+            success: true,
+            message: "Song removed"
         })
     } catch (error) {
         return res.status(500).json({message: "Failed to remove song"})

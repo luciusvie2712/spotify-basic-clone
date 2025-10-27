@@ -14,7 +14,7 @@ root/
 ````
 ---
 ## Features
-### 🎵 Songs
+###  Songs
 -  **Add Song** (`POST /add-song`)
   - Uploads `.mp3` file and song image to **Cloudinary**
   - Stores metadata + URLs in MongoDB  
@@ -184,5 +184,4 @@ Feel free to fork and improve. Pull requests are welcome.
 ---
 
 **Made with ❤️ by Bẻn**
-Nhiều dev thích có phần đó trong README để up production dễ hơn.
 ```

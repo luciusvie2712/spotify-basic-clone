@@ -1,51 +1,84 @@
-const cloudinary = require('cloudinary').v2
-const albumModel = require('../models/album.model')
-const { handleAddAlbum, handleGetListAlbum, handleDeleteAlbum } = require('../services/album.service')
+const { handleAddAlbum, handleGetListAlbum, handleDeleteAlbum, handleGetAlbumById } = require('../services/album.service')
 
 const addAlbum = async (req, res) => {
     try {
         const { name, description, bgColor } = req.body 
         const { image } = req.files
-
-        const albumData = handleAddAlbum({
+        if (!image || image.length === 0) {
+            return res.status(400).json({ success: false, message: "No image uploaded" });
+        }
+        const albumData = handleAddAlbum(
             name,
             description,
             bgColor,
-            imageFile: image[0],
+            image[0],
+        )
+        return res.status(201).json({
+            success: true, 
+            message: "Album Added", 
+            data: albumData
         })
-        return res.status(201).json({success: true, message: "Album Added", data: albumData})
     } catch (error) {
-        return res.status(500).json({success: false, message: error})
+        return res.status(500).json({
+            success: false,
+            message: error
+        })
     }
 }
 
 const getListAlbum = async (req, res) => {
     try {
         const dataListAlbum = await handleGetListAlbum({})
-        return {
-            Ec: 1,
-            Em: "Get list album is success!"
-        }
+        return res.status(200).json({
+            success: true,
+            message: "Get list album is success!",
+            data: dataListAlbum
+        })
     } catch (error) {
-        return res.status(500).json({message: "Failed to get albums"})
+        return res.status(500).json({
+            success: false,
+            message: "Failed to get albums"
+        })
+    }
+}
+
+const getAlbumById = async (req, res) => {
+    try {
+        const { id } = req.params
+        const dataAlbum = await handleGetAlbumById(id)
+        return res.status(200).json({
+            success: true,
+            message: "Get album success",
+            data: dataAlbum
+        })
+        
+    } catch (error) {
+        return res.status(500).json({
+            success: false,
+            message: "Failed to get album",
+        })
     }
 }
 
 const deleteAlbum = async (req, res) => {
     try {
-        const id = req.params
+        const {id} = req.params
         await handleDeleteAlbum(id)
-        return {
-            Ec: 1,
-            Em: "Album removed"
-        }
+        return res.status(200).json({
+            success: true,
+            message: "Album removed"
+        })
     } catch (error) {
-        return res.status(500).json({ message: "Failed to remove album"})
+        return res.status(500).json({ 
+            success: false,
+            message: "Failed to remove album"
+        })
     }
 }
 
 module.exports = {
     addAlbum,
     getListAlbum,
+    getAlbumById,
     deleteAlbum
 }

@@ -14,7 +14,7 @@ app.get('/', (req, res) => {
     return res.status(201).json("Server is runing ...")
 })
 
-
+app.use('/api', routeAPI)
 const startServer = async () => {
     try {
         await connectDB()
@@ -29,7 +29,7 @@ const startServer = async () => {
 
 startServer()
 
-app.use('/api', routeAPI)
+
 
 
 

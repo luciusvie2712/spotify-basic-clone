@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { deleteSongAPI, getListSongAPI } from "../utils/api.customize"
+import { deleteSongAPI, getListSongAPI } from "../utils/songApi.customize"
 import { toast } from "react-toastify"
 
 const ListSong = () => {
@@ -7,6 +7,7 @@ const ListSong = () => {
     const fetchListSong = async () => {
         try {
             const dataSongs = await getListSongAPI()
+            console.log(dataSongs)
             if (dataSongs.success) {
                 setData(dataSongs.data)
             }
@@ -46,7 +47,7 @@ const ListSong = () => {
                         <div key={index} className="grid grid-cols-[1fr_1fr_1fr] sm:grid-cols-[0.5fr_1fr_2fr_1fr_0.5fr] items-center gap-2.5 p-3 border border-gray-400 text-sm mr-5">
                             <img src={item.image} className="w-12" />
                             <p>{item.name}</p>
-                            <p>{item.album}</p> 
+                            <p>{item?.album?.name}</p> 
                             <p>{item.duration}</p>
                             <p onClick={() => removeSong(item._id)} className="cursor-pointer">X</p>
                         </div>

@@ -29,6 +29,16 @@ const handleGetListAlbum = async () => {
     return data
 }
 
+const handleGetAlbumById = async (id) => {
+    try {
+        const data = await albumModel.findById(id).populate('songs')
+        return data
+    } catch (error) {
+        console.error(">>> Error in handleGetAlbumById: ", error)
+        throw error
+    }
+}
+
 const handleDeleteAlbum = async (id) => {
     return await albumModel.findByIdAndDelete(id)
 }
@@ -36,5 +46,6 @@ const handleDeleteAlbum = async (id) => {
 module.exports = {
     handleAddAlbum,
     handleGetListAlbum,
+    handleGetAlbumById,
     handleDeleteAlbum
 }

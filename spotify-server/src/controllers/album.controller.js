@@ -1,16 +1,18 @@
-const { handleAddAlbum, handleGetListAlbum, handleDeleteAlbum } = require('../services/album.service')
+const { handleAddAlbum, handleGetListAlbum, handleDeleteAlbum, handleGetAlbumById } = require('../services/album.service')
 
 const addAlbum = async (req, res) => {
     try {
         const { name, description, bgColor } = req.body 
         const { image } = req.files
-
-        const albumData = handleAddAlbum({
+        if (!image || image.length === 0) {
+            return res.status(400).json({ success: false, message: "No image uploaded" });
+        }
+        const albumData = handleAddAlbum(
             name,
             description,
             bgColor,
-            imageFile: image[0],
-        })
+            image[0],
+        )
         return res.status(201).json({
             success: true, 
             message: "Album Added", 
@@ -40,9 +42,27 @@ const getListAlbum = async (req, res) => {
     }
 }
 
+const getAlbumById = async (req, res) => {
+    try {
+        const { id } = req.params
+        const dataAlbum = await handleGetAlbumById(id)
+        return res.status(200).json({
+            success: true,
+            message: "Get album success",
+            data: dataAlbum
+        })
+        
+    } catch (error) {
+        return res.status(500).json({
+            success: false,
+            message: "Failed to get album",
+        })
+    }
+}
+
 const deleteAlbum = async (req, res) => {
     try {
-        const id = req.params
+        const {id} = req.params
         await handleDeleteAlbum(id)
         return res.status(200).json({
             success: true,
@@ -59,5 +79,6 @@ const deleteAlbum = async (req, res) => {
 module.exports = {
     addAlbum,
     getListAlbum,
+    getAlbumById,
     deleteAlbum
 }

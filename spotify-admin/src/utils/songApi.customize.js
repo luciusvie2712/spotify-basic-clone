@@ -15,12 +15,10 @@ const addSongAPI = (name, description, image, audio, album) => {
         }
     })
 }
-
 const getListSongAPI = () => {
     const API_URL = '/api/list-song'
     return axios.get(API_URL)
 }
-
 const deleteSongAPI = (id) => {
     const API_URL = `/api/delete-song/${id}`
     return axios.delete(API_URL)

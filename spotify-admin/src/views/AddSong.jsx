@@ -1,10 +1,11 @@
 import upload_song from "../assets/data/upload_song.png"
 import upload_area from "../assets/data/upload_area.png"
 import upload_added from "../assets/data/upload_added.png"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import axios from 'axios'
-import { addSongAPI } from "../utils/api.customize"
+import { addSongAPI } from "../utils/songApi.customize"
 import { toast } from "react-toastify"
+import { getListAlbumAPI } from "../utils/albumApi.customize"
 
 const AddSong = () => {
 
@@ -20,13 +21,12 @@ const AddSong = () => {
         e.preventDefault()
         setLoading(true)
         try {
-            const res = await addSongAPI(name, description, image, audio, album)
-            console.log(res.success)
+            const res = await addSongAPI(name, description, image, audio, album)    
             if (res.success) {
                 toast.success("Song added")
                 setName("")
                 setDescription("")
-                setImage(fasle)
+                setImage(false)
                 setAudio(false)
                 setAlbum("none")
             } else {
@@ -34,9 +34,28 @@ const AddSong = () => {
             }
         } catch (error) {
             toast.error("Error")
+            console.log("Error", error)
         }
         setLoading(false)
     }
+
+    const loadDataAlbum = async () => {
+        try {
+            const res = await getListAlbumAPI()
+            console.log(res)
+            if (res?.success) {
+                setAlbumData(res.data)
+            } else {
+                toast.error("Unable to load albums data")
+            }
+        } catch (error) {
+            toast.error("Error Occured")
+        }
+    }
+
+    useEffect(() => {
+        loadDataAlbum()
+    }, [])
 
     return loading ? (
         <div className="grid place-items-center min-h-[80vh]">
@@ -61,20 +80,23 @@ const AddSong = () => {
                 </div>
             </div>
 
-            <div className="flex flex-col gap-2.5">
+            <div className="flex flex-col gap-2">
                 <p>Song Name</p>
                 <input onChange={(e) => setName(e.target.value)} value={name} className="bg-transparent outline-green-600 border-2 border-gray-500 p-2 w-[max(40vw,250px)]" placeholder="Enter song name here" type="text" required/>
             </div>
 
-            <div className="flex flex-col gap-2.5">
+            <div className="flex flex-col gap-2">
                 <p>Song Description</p>
                 <input onChange={(e) => setDescription(e.target.value)} value={description} className="bg-transparent outline-green-600 border-2 border-gray-500 p-2 w-[max(40vw,250px)]" placeholder="Enter description song here" type="text" required/>
             </div>
 
-            <div className="flex flex-col gap-2.5">
+            <div className="flex flex-col gap-2">
                 <p>Album</p>
-                <select onChange={(e) => setAlbum(e.target.value)} defaultValue={album} className="bg-transparent outline-green-600 border-2 border-gray-500 p-2 w-[max(10vw,150px)] cursor-pointer">
+                <select onChange={(e) => setAlbum(e.target.value)} value={album} className="bg-transparent outline-green-600 border-2 border-gray-500 p-2 w-[max(10vw,150px)] cursor-pointer">
                     <option value="none">None</option>
+                    {albumData.map((a, i) => (
+                        <option key={i} value={a._id}>{a.name}</option>
+                    ))}
                 </select>
             </div>
 

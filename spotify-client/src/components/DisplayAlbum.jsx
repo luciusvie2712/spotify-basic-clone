@@ -7,7 +7,7 @@ import { getAlbumByIdAPI, getListSongAPI } from "../utils/api.customize";
 
 const DisplayAlbum = ({ setBgColor }) => {
   const { id } = useParams();
-  const { playWithId } = useContext(PlayerContext);
+  const { playWithId, setSongs } = useContext(PlayerContext);
   const [ album, setAlbum ] = useState(null)
   const [loading, setLoading] = useState(true)
 
@@ -63,7 +63,7 @@ const DisplayAlbum = ({ setBgColor }) => {
           </div>
         </div>
       </div>
-
+      {/* ------------------     SHOW PLAYLIST      --------------------- */}
       <div className="grid grid-cols-3 sm:grid-cols-4 mt-10 mb-4 pl-2 text-gray-300 text-sm border-b border-gray-700 pb-2">
         <p>
           <b className="mr-4">#</b>Title
@@ -78,8 +78,8 @@ const DisplayAlbum = ({ setBgColor }) => {
           <div
             key={item._id}
             onClick={() => {
-              const songIndex = album.songs.findIndex(s => s._id === item._id)
-              if (songIndex !== -1) playWithId(songIndex)
+              setSongs(album?.songs) // <- cap nhat playlist hien tai trong album
+              playWithId(index) // <- phat bai o vi tri index trong album
             }}
             className="grid grid-cols-3 sm:grid-cols-4 gap-2 p-2 items-center cursor-pointer hover:bg-[#5c555561] text-[#ccc] rounded-md transition-all"
           >

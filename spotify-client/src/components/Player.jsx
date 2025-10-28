@@ -42,7 +42,7 @@ const Player = () => {
         <div>
           <p className="font-semibold">{currentTrack.name}</p>
           <p className="text-gray-400 text-sm">
-            {currentTrack.desc?.slice(0, 18) || "Unknown Artist"}
+            {currentTrack.description?.slice(0, 18) || "Unknown Artist"}
           </p>
         </div>
       </div>

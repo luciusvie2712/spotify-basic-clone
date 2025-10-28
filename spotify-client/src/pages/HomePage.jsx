@@ -1,5 +1,4 @@
 import NavBar from "../components/NavBar"
-import { albumsData, songsData } from "../assets/assets"
 import AlbumCard from "../components/AlbumCard"
 import SongCard from "../components/SongCard"
 import { getListAlbumAPI, getListSongAPI } from "../utils/api.customize"
